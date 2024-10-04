@@ -6,7 +6,7 @@ https://www.postgresql.fastware.com/knowledge-base/quick-start-guides
 
 yum install redhat-lsb -y
 
-yum install epel-release -y
+## yum install epel-release -y
 yum install redhat-lsb -y
 
 rpm -q redhat-lsb 
