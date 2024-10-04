@@ -6,14 +6,16 @@ https://www.postgresql.fastware.com/knowledge-base/quick-start-guides
 
 yum install redhat-lsb -y
 
-## yum install epel-release -y
+yum install epel-release -y
+
 yum install redhat-lsb -y
 
 rpm -q redhat-lsb 
 
 
 
-[root@hostname ~]# yum install alsa-lib
+yum install alsa-lib
+
 [root@hostname ~]# yum install llvm
 [root@hostname ~]# yum install lz4-libs 
 [root@hostname ~]# yum install pam
