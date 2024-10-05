@@ -88,18 +88,18 @@ Syncing disks.
   Physical volume "/dev/sdb1" successfully created.
 ```
 ```
-[root@ABDUMR ~]# vgcreate db_vg /dev/sdb1
-  Volume group "db_vg" successfully created
+[root@ABDUMR ~]# vgcreate database_vg /dev/sdb1
+  Volume group "database_vg" successfully created
 ```
 ```
-[root@ABDUMRt ~]# lvcreate -l 100%FREE -n db_lv db_vg
-  Logical volume "db_lv" created.
+[root@ABDUMR ~]# lvcreate -l 100%FREE -n database_lv database_vg
+  Logical volume "database_lv" created.
 ```
 ```
-[root@ABDUMR ~]# mkfs.ext4 /dev/db_vg/db_lv
+[root@ABDUMR ~]# mkfs.ext4 /dev/database_vg/database_lv
 mke2fs 1.45.6 (20-Mar-2020)
 Creating filesystem with 15727616 4k blocks and 3932160 inodes
-Filesystem UUID: d6ae70a5-5b60-449d-8d1a-e30df9f56be8
+Filesystem UUID: 0b241990-fc6e-4e52-a4d2-4a1b6f7ff642
 Superblock backups stored on blocks:
         32768, 98304, 163840, 229376, 294912, 819200, 884736, 1605632, 2654208,
         4096000, 7962624, 11239424
@@ -111,27 +111,26 @@ Writing superblocks and filesystem accounting information: done
 
 ```
 ```
-[root@ABDUMR ~]# mkdir /mnt/db
-[root@ABDUMR ~]# mount /dev/db_vg/db_lv /mnt/db
+[root@ABDUMR ~]# mount /dev/database_vg/database_lv /opt
 ```
 ```
 [root@ABDUMR ~]# vim /etc/fstab
-/dev/db_vg/db_lv /mnt/db ext4 defaults 0 0
+/dev/database_vg/database_lv /opt  ext4 defaults 0 0
 ```
 
 ```
 [root@ABDUMR ~]# lsblk
-NAME            MAJ:MIN RM  SIZE RO TYPE MOUNTPOINT
-sda               8:0    0   60G  0 disk
-├─sda1            8:1    0    1G  0 part /boot
-└─sda2            8:2    0   59G  0 part
-  ├─ol-root     252:0    0 36.4G  0 lvm  /
-  ├─ol-swap     252:1    0  4.9G  0 lvm  [SWAP]
-  └─ol-home     252:2    0 17.8G  0 lvm  /home
-sdb               8:16   0   60G  0 disk
-└─sdb1            8:17   0   60G  0 part
-  └─db_vg-db_lv 252:3    0   60G  0 lvm  /mnt/db
-sr0              11:0    1 1024M  0 rom
+NAME                        MAJ:MIN RM  SIZE RO TYPE MOUNTPOINT
+sda                           8:0    0   60G  0 disk
+├─sda1                        8:1    0    1G  0 part /boot
+└─sda2                        8:2    0   59G  0 part
+  ├─ol-root                 252:0    0 36.4G  0 lvm  /
+  ├─ol-swap                 252:1    0  4.9G  0 lvm  [SWAP]
+  └─ol-home                 252:2    0 17.8G  0 lvm  /home
+sdb                           8:16   0   60G  0 disk
+└─sdb1                        8:17   0   60G  0 part
+  └─database_vg-database_lv 252:3    0   60G  0 lvm  /opt
+sr0                          11:0    1 1024M  0 rom
 ```
 
 ```
