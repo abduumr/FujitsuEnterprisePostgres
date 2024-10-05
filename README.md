@@ -158,6 +158,7 @@ tmpfs                    453M     0  453M   0% /run/user/0
 redhat-lsb-4.1-47.0.1.el8.x86_64
 ```
 ```
+[root@ABDUMR ~]# mkdir -p /media/dvd
 [root@ABDUMR ~]# mkdir -p /mnt/db/inst1
 [root@ABDUMR ~]# mkdir -p /mnt/db/backup
 [root@ABDUMR ~]# mkdir -p /mnt/db/pg_tblspc
@@ -178,22 +179,202 @@ passwd: all authentication tokens updated successfully.
 [root@ABDUMR ~]# chown -R fepuser /mnt/db/pg_tblspc
 ```
 ```
+[root@ABDUMR ~]# ls /home/admin/Downloads/
+FujitsuEnterprisePostgres.iso
+```
+```
+[root@ABDUMR ~]# mount -t iso9660 -r -o loop /home/admin/Downloads/FujitsuEnterprisePostgres.iso /media/dvd
+[root@ABDUMR ~]# cd /media/dvd
+[root@ABDUMR dvd]# ls
+CIR       COMMON      manual       parser   readme.txt       sample  silent.sh
+CLIENT64  install.sh  OSS_Licence  PGPOOL2  readme_utf8.txt  SERVER  WEBADMIN
+```
+```
+[root@ABDUMR dvd]# ./install.sh
+
+The following products can be installed:
+1: FUJITSU Enterprise Postgres Advanced Edition (64bit) 14 SP1
+2: FUJITSU Enterprise Postgres Client (64bit) 14 SP1
+3: FUJITSU Enterprise Postgres WebAdmin 14 SP1
+4: FUJITSU Enterprise Postgres Pgpool-II 14 SP1
+
+Select the product to be installed.
+Note: If installing the Server, it is strongly recommended to install WebAdmin.                                          
+To select multiple products, separate using commas (,). (Example: 1,2)
+[number,all,q](The default value is 1,2,3): [all]
+
+Selected product
+  FUJITSU Enterprise Postgres Advanced Edition (64bit) 14 SP1
+  FUJITSU Enterprise Postgres Client (64bit) 14 SP1
+  FUJITSU Enterprise Postgres WebAdmin 14 SP1
+  FUJITSU Enterprise Postgres Pgpool-II 14 SP1
+
+Do you want to install the above product?
+y: Proceed to the next step
+n: Select the product again
+q: Quit without installing
+[y,n,q](The default value is y): [y]
+
+==============================================================================
+
+Product to be installed
+  FUJITSU Enterprise Postgres Advanced Edition (64bit) 14 SP1
+    New installation
+  FUJITSU Enterprise Postgres Client (64bit) 14 SP1
+    New installation
+  FUJITSU Enterprise Postgres WebAdmin 14 SP1
+    New installation
+  FUJITSU Enterprise Postgres Pgpool-II 14 SP1
+    New installation
+
+Installation directory information
+  FUJITSU Enterprise Postgres Advanced Edition (64bit) 14 SP1
+    /opt/fsepv14server64
+  FUJITSU Enterprise Postgres Client (64bit) 14 SP1
+    /opt/fsepv14client64
+  FUJITSU Enterprise Postgres WebAdmin 14 SP1
+    /opt/fsepv14webadmin
+  FUJITSU Enterprise Postgres Pgpool-II 14 SP1
+    /opt/fsepv14pgpool-II
+
+Setup information
+  WebAdmin setup: Execute
+  Web server port number: 27515
+  WebAdmin internal port number: 27516
+
+Start installation using the above information?
+y: Start the installation
+c: Change the information
+q: Quit without installing
+[y,c,q](The default value is y): [y]
+
+
+==============================================================================
+Starting installation.
+
+FUJITSU Enterprise Postgres Advanced Edition (64bit) 14 SP1 Installation
+
+Installation is complete.
+
+FUJITSU Enterprise Postgres Client (64bit) 14 SP1 Installation
+
+Installation is complete.
+
+FUJITSU Enterprise Postgres WebAdmin 14 SP1 Installation
+
+Installation is complete.
+
+FUJITSU Enterprise Postgres Pgpool-II 14 SP1 Installation
+
+Installation is complete.
+
+Starting setup.
+
+Sets up WebAdmin.
+
+Setup is complete.
+
+Installed successfully.
+
+```
+```
+[root@ABDUMR dvd]# ls -l /opt
+total 4
+dr-xr-x---.  4 root root   48 Oct  5 12:47 FJSVcir
+drwxr-xr-x.  3 root root 4096 Oct  5 12:48 FJSVqstl
+drwxr-xr-x. 12 root root  126 Jul  4  2022 fsepv14client64
+drwxr-xr-x.  9 root root   91 Oct  5 12:49 fsepv14pgpool-II
+drwxr-xr-x. 14 root root  147 Jul  4  2022 fsepv14server64
+drwxr-xr-x. 13 root root  137 Oct  5 12:48 fsepv14webadmin
+```
+```
+[root@ABDUMR dvd]# su - fepuser
+[fepuser@ABDUMR ~]$ vi .bash_profile
+
+PATH=/opt/fsepv14server64/bin:$HOME/.local/bin:$HOME/bin:$PATH
+MANPATH=/opt/fsepv14server64/share/man:$MANPATH
+LD_LIBRARY_PATH=/opt/fsepv14server64/lib:$LD_LIBRARY_PATH
+export PATH
+export MANPATH
+export LD_LIBRARY_PATH
+
+[fepuser@ABDUMR ~]$ . ./.bash_profile
+```
+```
+[fepuser@ABDUMR ~]$ initdb -D /mnt/db/inst1 --lc-collate="C" --lc-ctype="C" --encoding=UTF8
+The files belonging to this database system will be owned by user "fepuser".
+This user must also own the server process.
+
+The database cluster will be initialized with locales
+  COLLATE:  C
+  CTYPE:    C
+  MESSAGES: en_US.UTF-8
+  MONETARY: en_US.UTF-8
+  NUMERIC:  en_US.UTF-8
+  TIME:     en_US.UTF-8
+The default text search configuration will be set to "english". (15541)
+
+Data page checksums are disabled. (18153)
+
+fixing permissions on existing directory /mnt/db/inst1 ... ok (15516)
+creating subdirectories ... ok (15516)
+selecting dynamic shared memory implementation ... posix
+selecting default max_connections ... 100
+selecting default shared_buffers ... 128MB
+selecting default time zone ...  (19842)Asia/Jakarta
+creating configuration files ... ok (15516)
+running bootstrap script ... ok (15516)
+performing post-bootstrap initialization ... ok (15516)
+syncing data to disk ... ok (15516)
+
+initdb: warning: enabling "trust" authentication for local connections
+You can change this by editing pg_hba.conf or using the option -A, or
+--auth-local and --auth-host, the next time you run initdb.
+
+Success. You can now start the database server using:
+
+    pg_ctl -D /mnt/db/inst1 -l logfile start
+```
+```
+[fepuser@ABDUMR ~]$ pg_ctl -D /mnt/db/inst1 start -l logfile
+waiting for server to start.... done
+server started
+```
+```
+[fepuser@ABDUMR ~]$ psql -d postgres
+psql (14.0)
+Type "help" for help.
+```
+```
+
+postgres=# \l+
+                                                             List of databases
+   Name    |  Owner  | Encoding | Collate | Ctype |  Access privileges  |  Size   | Tablespace |                Descripti
+on
+-----------+---------+----------+---------+-------+---------------------+---------+------------+-------------------------
+-------------------
+ postgres  | fepuser | UTF8     | C       | C     |                     | 8979 kB | pg_default | default administrative c
+onnection database
+ template0 | fepuser | UTF8     | C       | C     | =c/fepuser         +| 8825 kB | pg_default | unmodifiable empty datab
+ase
+           |         |          |         |       | fepuser=CTc/fepuser |         |            |
+ template1 | fepuser | UTF8     | C       | C     | =c/fepuser         +| 8825 kB | pg_default | default template for new
+ databases
+           |         |          |         |       | fepuser=CTc/fepuser |         |            |
+(3 rows)
+```
+
+```
 -isi
 ```
-```
--isi
-```
-```
--isi
-```
+
 ```
 -isi
 ```
 
-
-
-
-
+```
+-isi
+```
 
 
 
