@@ -84,21 +84,25 @@ Calling ioctl() to re-read partition table.
 Syncing disks.
 
 ```
+# 
 Perintah pvcreate /dev/sdb1 digunakan untuk menginisialisasi partisi (dalam hal ini, /dev/sdb1) sebagai Physical Volume (PV) untuk Logical Volume Manager (LVM) di Linux. LVM adalah metode untuk mengelola ruang penyimpanan secara lebih fleksibel daripada menggunakan partisi tradisional.
 ```
 [root@ABDUMR ~]# pvcreate /dev/sdb1
   Physical volume "/dev/sdb1" successfully created.
 ```
+# 
 Perintah vgcreate database_vg /dev/sdb1 digunakan untuk membuat Volume Group (VG) baru di dalam sistem Logical Volume Manager (LVM)
 ```
 [root@ABDUMR ~]# vgcreate database_vg /dev/sdb1
   Volume group "database_vg" successfully created
 ```
+# 
 Perintah lvcreate -l 100%FREE -n database_lv database_vg digunakan untuk membuat Logical Volume (LV) baru bernama database_lv dalam Volume Group (VG) bernama database_vg.
 ```
 [root@ABDUMR ~]# lvcreate -l 100%FREE -n database_lv database_vg
   Logical volume "database_lv" created.
 ```
+# 
 Perintah mkfs.ext4 /dev/database_vg/database_lv digunakan untuk memformat Logical Volume (LV) database_lv, yang terletak di dalam Volume Group database_vg, dengan sistem file ext4.
 ```
 [root@ABDUMR ~]# mkfs.ext4 /dev/database_vg/database_lv
@@ -115,10 +119,12 @@ Creating journal (65536 blocks): done
 Writing superblocks and filesystem accounting information: done
 
 ```
+# 
 Perintah mount /dev/database_vg/database_lv /opt digunakan untuk mount (mengaitkan) Logical Volume (LV) database_lv, yang berada dalam Volume Group (VG) database_vg, ke direktori /opt.
 ```
 [root@ABDUMR ~]# mount /dev/database_vg/database_lv /opt
 ```
+# 
 File /etc/fstab adalah file konfigurasi di Linux yang berisi daftar perangkat penyimpanan (partisi, Logical Volume, disk, dll.) yang akan di-mount secara otomatis saat sistem melakukan booting.
 ```
 [root@ABDUMR ~]# vim /etc/fstab
@@ -284,13 +290,15 @@ Installed successfully.
 ```
 ```
 [root@ABDUMR dvd]# ls -l /opt
-total 4
-dr-xr-x---.  4 root root   48 Oct  5 12:47 FJSVcir
-drwxr-xr-x.  3 root root 4096 Oct  5 12:48 FJSVqstl
-drwxr-xr-x. 12 root root  126 Jul  4  2022 fsepv14client64
-drwxr-xr-x.  9 root root   91 Oct  5 12:49 fsepv14pgpool-II
-drwxr-xr-x. 14 root root  147 Jul  4  2022 fsepv14server64
-drwxr-xr-x. 13 root root  137 Oct  5 12:48 fsepv14webadmin
+total 44
+drwxr-xr-x.  5 root root  4096 Oct  5 16:14 database
+dr-xr-x---.  4 root root  4096 Oct  5 16:48 FJSVcir
+drwxr-xr-x.  3 root root  4096 Oct  5 16:48 FJSVqstl
+drwxr-xr-x. 12 root root  4096 Jul  4  2022 fsepv14client64
+drwxr-xr-x.  9 root root  4096 Oct  5 16:49 fsepv14pgpool-II
+drwxr-xr-x. 14 root root  4096 Jul  4  2022 fsepv14server64
+drwxr-xr-x. 13 root root  4096 Oct  5 16:49 fsepv14webadmin
+drwx------.  2 root root 16384 Oct  5 15:57 lost+found
 ```
 ```
 [root@ABDUMR dvd]# su - fepuser
@@ -306,7 +314,7 @@ export LD_LIBRARY_PATH
 [fepuser@ABDUMR ~]$ . ./.bash_profile
 ```
 ```
-[fepuser@ABDUMR ~]$ initdb -D /mnt/db/inst1 --lc-collate="C" --lc-ctype="C" --encoding=UTF8
+[fepuser@ABDUMR ~]$ initdb -D /opt/database/inst1 --lc-collate="C" --lc-ctype="C" --encoding=UTF8
 The files belonging to this database system will be owned by user "fepuser".
 This user must also own the server process.
 
@@ -338,10 +346,10 @@ You can change this by editing pg_hba.conf or using the option -A, or
 
 Success. You can now start the database server using:
 
-    pg_ctl -D /mnt/db/inst1 -l logfile start
+    pg_ctl -D /opt/database/inst1 -l logfile start
 ```
 ```
-[fepuser@ABDUMR ~]$ pg_ctl -D /mnt/db/inst1 start -l logfile
+[fepuser@ABDUMR ~]$ pg_ctl -D /opt/database/inst1 start -l logfile
 waiting for server to start.... done
 server started
 ```
@@ -384,9 +392,11 @@ postgres=# \l
            |         |          |         |       | fepuser=CTc/fepuser
 (4 rows)
 
+postgres=# \q
 ```
 
 ```
+[fepuser@ABDUMR ~]$ exit
 [root@ABDUMR fsepv14webadmin]# cd /opt/fsepv14webadmin/sbin/
 [root@ABDUMR sbin]# ls
 WebAdminPs  WebAdminSetup  WebAdminStart  WebAdminStop
