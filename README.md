@@ -9,7 +9,7 @@ https://www.postgresql.fastware.com/knowledge-base/quick-start-guides
 
 ```
 [root@ABDUMR ~]# hostnamectl
-   Static hostname: ABDUMRt.localdomain
+   Static hostname: ABDUMR.localdomain
          Icon name: computer-vm
            Chassis: vm
         Machine ID: aee3bd3429a84e97959e8d0649ae25be
@@ -135,17 +135,17 @@ sr0                          11:0    1 1024M  0 rom
 
 ```
 [root@ABDUMR ~]# df -h
-Filesystem               Size  Used Avail Use% Mounted on
-devtmpfs                 2.2G     0  2.2G   0% /dev
-tmpfs                    2.3G     0  2.3G   0% /dev/shm
-tmpfs                    2.3G  9.1M  2.2G   1% /run
-tmpfs                    2.3G     0  2.3G   0% /sys/fs/cgroup
-/dev/mapper/ol-root       37G  6.8G   30G  19% /
-/dev/mapper/ol-home       18G  1.6G   17G   9% /home
-/dev/sda1               1014M  344M  671M  34% /boot
-tmpfs                    453M   12K  453M   1% /run/user/42
-tmpfs                    453M     0  453M   0% /run/user/0
-/dev/mapper/db_vg-db_lv   59G   24K   56G   1% /mnt/db
+Filesystem                           Size  Used Avail Use% Mounted on
+devtmpfs                             2.2G     0  2.2G   0% /dev
+tmpfs                                2.3G     0  2.3G   0% /dev/shm
+tmpfs                                2.3G  9.1M  2.2G   1% /run
+tmpfs                                2.3G     0  2.3G   0% /sys/fs/cgroup
+/dev/mapper/ol-root                   37G  6.8G   30G  19% /
+/dev/sda1                           1014M  344M  671M  34% /boot
+/dev/mapper/ol-home                   18G  1.6G   17G   9% /home
+tmpfs                                453M   12K  453M   1% /run/user/42
+tmpfs                                453M     0  453M   0% /run/user/0
+/dev/mapper/database_vg-database_lv   59G   24K   56G   1% /opt
 
 ```
 ```
