@@ -84,18 +84,22 @@ Calling ioctl() to re-read partition table.
 Syncing disks.
 
 ```
+Perintah pvcreate /dev/sdb1 digunakan untuk menginisialisasi partisi (dalam hal ini, /dev/sdb1) sebagai Physical Volume (PV) untuk Logical Volume Manager (LVM) di Linux. LVM adalah metode untuk mengelola ruang penyimpanan secara lebih fleksibel daripada menggunakan partisi tradisional.
 ```
 [root@ABDUMR ~]# pvcreate /dev/sdb1
   Physical volume "/dev/sdb1" successfully created.
 ```
+Perintah vgcreate database_vg /dev/sdb1 digunakan untuk membuat Volume Group (VG) baru di dalam sistem Logical Volume Manager (LVM)
 ```
 [root@ABDUMR ~]# vgcreate database_vg /dev/sdb1
   Volume group "database_vg" successfully created
 ```
+Perintah lvcreate -l 100%FREE -n database_lv database_vg digunakan untuk membuat Logical Volume (LV) baru bernama database_lv dalam Volume Group (VG) bernama database_vg.
 ```
 [root@ABDUMR ~]# lvcreate -l 100%FREE -n database_lv database_vg
   Logical volume "database_lv" created.
 ```
+Perintah mkfs.ext4 /dev/database_vg/database_lv digunakan untuk memformat Logical Volume (LV) database_lv, yang terletak di dalam Volume Group database_vg, dengan sistem file ext4.
 ```
 [root@ABDUMR ~]# mkfs.ext4 /dev/database_vg/database_lv
 mke2fs 1.45.6 (20-Mar-2020)
@@ -111,9 +115,11 @@ Creating journal (65536 blocks): done
 Writing superblocks and filesystem accounting information: done
 
 ```
+Perintah mount /dev/database_vg/database_lv /opt digunakan untuk mount (mengaitkan) Logical Volume (LV) database_lv, yang berada dalam Volume Group (VG) database_vg, ke direktori /opt.
 ```
 [root@ABDUMR ~]# mount /dev/database_vg/database_lv /opt
 ```
+File /etc/fstab adalah file konfigurasi di Linux yang berisi daftar perangkat penyimpanan (partisi, Logical Volume, disk, dll.) yang akan di-mount secara otomatis saat sistem melakukan booting.
 ```
 [root@ABDUMR ~]# vim /etc/fstab
 /dev/database_vg/database_lv /opt  ext4 defaults 0 0
