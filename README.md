@@ -161,6 +161,14 @@ tmpfs                                453M     0  453M   0% /run/user/0
 /dev/mapper/database_vg-database_lv   59G   24K   56G   1% /opt
 
 ```
+# 
+```
+[root@ABDUMR ~]# vim /etc/hosts
+127.0.0.1   localhost localhost.localdomain localhost4 localhost4.localdomain4
+::1         localhost localhost.localdomain localhost6 localhost6.localdomain6
+192.168.100.14 ABDUMR.localdomain ABDUMR
+```
+# 
 ```
 [root@ABDUMR ~]# yum install redhat-lsb -y
 [root@ABDUMR ~]# yum install epel-release -y
