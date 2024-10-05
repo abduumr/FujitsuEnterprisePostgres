@@ -21,6 +21,38 @@ sdb           8:16   0   60G  0 disk
 sr0          11:0    1 1024M  0 rom
 ```
 ```
+[root@ABDUMRt ~]# df -h
+Filesystem           Size  Used Avail Use% Mounted on
+devtmpfs             2.2G     0  2.2G   0% /dev
+tmpfs                2.3G     0  2.3G   0% /dev/shm
+tmpfs                2.3G  9.1M  2.2G   1% /run
+tmpfs                2.3G     0  2.3G   0% /sys/fs/cgroup
+/dev/mapper/ol-root   37G  6.8G   30G  19% /
+/dev/mapper/ol-home   18G  1.6G   17G   9% /home
+/dev/sda1           1014M  344M  671M  34% /boot
+tmpfs                453M   12K  453M   1% /run/user/42
+tmpfs                453M     0  453M   0% /run/user/0
+```
+```
+[root@ABDUMRt ~]# free -h
+              total        used        free      shared  buff/cache   available
+Mem:          4.4Gi       587Mi       1.9Gi        10Mi       1.9Gi       3.6Gi
+Swap:         4.8Gi          0B       4.8Gi
+```
+```
+[root@ABDUMRt ~]# hostnamectl
+   Static hostname: ABDUMRt.localdomain
+         Icon name: computer-vm
+           Chassis: vm
+        Machine ID: aee3bd3429a84e97959e8d0649ae25be
+           Boot ID: e82b3b84cc1f409e8fe3144b9acdad5a
+    Virtualization: oracle
+  Operating System: Oracle Linux Server 8.8
+       CPE OS Name: cpe:/o:oracle:linux:8:8:server
+            Kernel: Linux 5.15.0-101.103.2.1.el8uek.x86_64
+      Architecture: x86-64
+```
+```
 [root@ABDUMRt ~]# fdisk /dev/sdb
 
 Welcome to fdisk (util-linux 2.32.1).
