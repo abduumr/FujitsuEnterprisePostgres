@@ -19,7 +19,8 @@ sda           8:0    0   60G  0 disk
   └─ol-home 252:2    0 17.8G  0 lvm  /home
 sdb           8:16   0   60G  0 disk
 sr0          11:0    1 1024M  0 rom
-
+```
+```
 [root@ABDUMRt ~]# fdisk /dev/sdb
 
 Welcome to fdisk (util-linux 2.32.1).
@@ -29,18 +30,18 @@ Be careful before using the write command.
 Device does not contain a recognized partition table.
 Created a new DOS disklabel with disk identifier 0xf55d1076.
 
-Command (m for help): n
+Command (m for help): [n]
 Partition type
    p   primary (0 primary, 0 extended, 4 free)
    e   extended (container for logical partitions)
-Select (default p): p
+Select (default p): [p]
 Partition number (1-4, default 1):
 First sector (2048-125829119, default 2048):
 Last sector, +sectors or +size{K,M,G,T,P} (2048-125829119, default 125829119):
 
 Created a new partition 1 of type 'Linux' and of size 60 GiB.
 
-Command (m for help): w
+Command (m for help): [w]
 
 The partition table has been altered.
 Calling ioctl() to re-read partition table.
