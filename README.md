@@ -172,7 +172,6 @@ tmpfs                                453M     0  453M   0% /run/user/0
 ```
 [root@ABDUMR ~]# yum install redhat-lsb -y
 [root@ABDUMR ~]# yum install epel-release -y
-[root@ABDUMR ~]# yum install redhat-lsb -y
 [root@ABDUMR ~]# rpm -q redhat-lsb
 redhat-lsb-4.1-47.0.1.el8.x86_64
 ```
