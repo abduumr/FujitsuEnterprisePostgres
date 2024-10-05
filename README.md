@@ -117,72 +117,105 @@ Writing superblocks and filesystem accounting information: done
 ```
 [root@ABDUMR ~]# vim /etc/fstab
 /dev/db_vg/db_lv /mnt/db ext4 defaults 0 0
+```
 
 ```
-yum install redhat-lsb -y
+[root@ABDUMR ~]# lsblk
+NAME            MAJ:MIN RM  SIZE RO TYPE MOUNTPOINT
+sda               8:0    0   60G  0 disk
+├─sda1            8:1    0    1G  0 part /boot
+└─sda2            8:2    0   59G  0 part
+  ├─ol-root     252:0    0 36.4G  0 lvm  /
+  ├─ol-swap     252:1    0  4.9G  0 lvm  [SWAP]
+  └─ol-home     252:2    0 17.8G  0 lvm  /home
+sdb               8:16   0   60G  0 disk
+└─sdb1            8:17   0   60G  0 part
+  └─db_vg-db_lv 252:3    0   60G  0 lvm  /mnt/db
+sr0              11:0    1 1024M  0 rom
+```
 
-yum install epel-release -y
+```
+[root@ABDUMR ~]# df -h
+Filesystem               Size  Used Avail Use% Mounted on
+devtmpfs                 2.2G     0  2.2G   0% /dev
+tmpfs                    2.3G     0  2.3G   0% /dev/shm
+tmpfs                    2.3G  9.1M  2.2G   1% /run
+tmpfs                    2.3G     0  2.3G   0% /sys/fs/cgroup
+/dev/mapper/ol-root       37G  6.8G   30G  19% /
+/dev/mapper/ol-home       18G  1.6G   17G   9% /home
+/dev/sda1               1014M  344M  671M  34% /boot
+tmpfs                    453M   12K  453M   1% /run/user/42
+tmpfs                    453M     0  453M   0% /run/user/0
+/dev/mapper/db_vg-db_lv   59G   24K   56G   1% /mnt/db
 
-yum install redhat-lsb -y
+```
 
-rpm -q redhat-lsb 
+```
+[root@ABDUMR ~]# df -h
+Filesystem               Size  Used Avail Use% Mounted on
+devtmpfs                 2.2G     0  2.2G   0% /dev
+tmpfs                    2.3G     0  2.3G   0% /dev/shm
+tmpfs                    2.3G  9.1M  2.2G   1% /run
+tmpfs                    2.3G     0  2.3G   0% /sys/fs/cgroup
+/dev/mapper/ol-root       37G  6.8G   30G  19% /
+/dev/mapper/ol-home       18G  1.6G   17G   9% /home
+/dev/sda1               1014M  344M  671M  34% /boot
+tmpfs                    453M   12K  453M   1% /run/user/42
+tmpfs                    453M     0  453M   0% /run/user/0
+/dev/mapper/db_vg-db_lv   59G   24K   56G   1% /mnt/db
 
+```
+```
+-isi
+```
+```
+-isi
+```
+```
+-isi
+```
+```
+-isi
+```
+```
+-isi
+```
+```
+-isi
+```
+```
+-isi
+```
 
 
-yum install alsa-lib
 
-[root@hostname ~]# yum install llvm
-[root@hostname ~]# yum install lz4-libs 
-[root@hostname ~]# yum install pam
 
 
 
-[root@hostname ~]# mkdir -p /media/dvd
-[root@hostname ~]# mkdir -p /database/inst1
-[root@hostname ~]# mkdir /backup
-[root@hostname ~]# mkdir /pg_tblspc
 
 
 
 
-[root@hostname ~]# useradd -m fepuser
-[root@hostname ~]# passwd fepuser
 
 
 
-[root@hostname ~]# chown -R fepuser /database/inst1
-[root@hostname ~]# chown -R fepuser /backup
-[root@hostname ~]# chown -R fepuser /pg_tblspc
 
 
 
 
-[root@hostname ~]# mount -t iso9660 -r -o loop /home/admin/Downloads/FUJITSU_Enterprise_Postgres_version_FullVersion.iso /media/dvd
 
 
-[root@hostname ~]# cd /media/dvd
-[root@hostname ~]# ./install.sh
 
 
 
 
 
-[root@hostname ~]# ls -l /opt
 
 
 
-[root@hostname ~]# su - fepuser
-[fepuser@hostname ~]$ vi .bash_profile
 
 
 
-PATH=/opt/fsepv14server64/bin:$HOME/.local/bin:$HOME/bin:$PATH
-MANPATH=/opt/fsepv14server64/share/man:$MANPATH
-LD_LIBRARY_PATH=/opt/fsepv14server64/lib:$LD_LIBRARY_PATH
-export PATH
-export MANPATH
-export LD_LIBRARY_PATH
-~
 
 
 
@@ -195,9 +228,7 @@ export LD_LIBRARY_PATH
 
 
 
-[fepuser@TEST ~]$ . ./.bash_profile
 
-[fepuser@TEST ~]$ initdb -D /database/inst1 --lc-collate="C" --lc-ctype="C" --encoding=UTF8
 
 
 
@@ -213,29 +244,6 @@ export LD_LIBRARY_PATH
 
 
 
-
-
-
-
-
-[fepuser@hostname ~]$ pg_ctl -D /database/inst1 start -l logfile
-[fepuser@hostname ~]$ psql -d postgres
-postgres=# \l+
-
-[fepuser@TEST ~]$ curl -kv http://localhost:27515
-
-
-
-
-
-
-
-
-[root@TEST ~]# cd /opt/fsepv14webadmin/sbin/
-
-[root@TEST sbin]# ll
-
-[root@TEST sbin]# ./WebAdminSetup
 
 
 
