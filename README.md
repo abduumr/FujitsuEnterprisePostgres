@@ -157,9 +157,9 @@ redhat-lsb-4.1-47.0.1.el8.x86_64
 ```
 ```
 [root@ABDUMR ~]# mkdir -p /media/dvd
-[root@ABDUMR ~]# mkdir -p /mnt/db/inst1
-[root@ABDUMR ~]# mkdir -p /mnt/db/backup
-[root@ABDUMR ~]# mkdir -p /mnt/db/pg_tblspc
+[root@ABDUMR ~]# mkdir -p /opt/database/inst1
+[root@ABDUMR ~]# mkdir -p /opt/database/backup
+[root@ABDUMR ~]# mkdir -p /opt/database/pg_tblspc
 ```
 ```
 [root@ABDUMR ~]# useradd -m fepuser
@@ -172,9 +172,9 @@ passwd: all authentication tokens updated successfully.
 
 ```
 ```
-[root@ABDUMR ~]# chown -R fepuser /mnt/db/inst1
-[root@ABDUMR ~]# chown -R fepuser /mnt/db/backup
-[root@ABDUMR ~]# chown -R fepuser /mnt/db/pg_tblspc
+[root@ABDUMR ~]# chown -R fepuser /opt/database/inst1
+[root@ABDUMR ~]# chown -R fepuser /opt/database/backup
+[root@ABDUMR ~]# chown -R fepuser /opt/database/pg_tblspc
 ```
 ```
 [root@ABDUMR ~]# ls /home/admin/Downloads/
