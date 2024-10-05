@@ -2,8 +2,23 @@
 Installasi Fujitsu Enterprise Postgres on Oracle Linux 8
 
 
+
 ```
 https://www.postgresql.fastware.com/knowledge-base/quick-start-guides
+```
+
+
+```
+[root@ABDUMRt ~]# lsblk
+NAME        MAJ:MIN RM  SIZE RO TYPE MOUNTPOINT
+sda           8:0    0   60G  0 disk
+├─sda1        8:1    0    1G  0 part /boot
+└─sda2        8:2    0   59G  0 part
+  ├─ol-root 252:0    0 36.4G  0 lvm  /
+  ├─ol-swap 252:1    0  4.9G  0 lvm  [SWAP]
+  └─ol-home 252:2    0 17.8G  0 lvm  /home
+sdb           8:16   0   60G  0 disk
+sr0          11:0    1 1024M  0 rom
 ```
 yum install redhat-lsb -y
 
