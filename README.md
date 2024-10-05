@@ -151,28 +151,31 @@ tmpfs                    453M     0  453M   0% /run/user/0
 ```
 
 ```
-[root@ABDUMR ~]# df -h
-Filesystem               Size  Used Avail Use% Mounted on
-devtmpfs                 2.2G     0  2.2G   0% /dev
-tmpfs                    2.3G     0  2.3G   0% /dev/shm
-tmpfs                    2.3G  9.1M  2.2G   1% /run
-tmpfs                    2.3G     0  2.3G   0% /sys/fs/cgroup
-/dev/mapper/ol-root       37G  6.8G   30G  19% /
-/dev/mapper/ol-home       18G  1.6G   17G   9% /home
-/dev/sda1               1014M  344M  671M  34% /boot
-tmpfs                    453M   12K  453M   1% /run/user/42
-tmpfs                    453M     0  453M   0% /run/user/0
-/dev/mapper/db_vg-db_lv   59G   24K   56G   1% /mnt/db
+[root@ABDUMR ~]# yum install redhat-lsb -y
+[root@ABDUMR ~]# yum install epel-release -y
+[root@ABDUMR ~]# yum install redhat-lsb -y
+[root@ABDUMR ~]# rpm -q redhat-lsb
+redhat-lsb-4.1-47.0.1.el8.x86_64
+```
+```
+[root@ABDUMR ~]# mkdir -p /mnt/db/inst1
+[root@ABDUMR ~]# mkdir -p /mnt/db/backup
+[root@ABDUMR ~]# mkdir -p /mnt/db/pg_tblspc
+```
+```
+[root@ABDUMR ~]# useradd -m fepuser
+[root@ABDUMR ~]# passwd fepuser
+Changing password for user fepuser.
+New password:
+BAD PASSWORD: The password fails the dictionary check - it is based on a dictionary word
+Retype new password:
+passwd: all authentication tokens updated successfully.
 
 ```
 ```
--isi
-```
-```
--isi
-```
-```
--isi
+[root@ABDUMR ~]# chown -R fepuser /mnt/db/inst1
+[root@ABDUMR ~]# chown -R fepuser /mnt/db/backup
+[root@ABDUMR ~]# chown -R fepuser /mnt/db/pg_tblspc
 ```
 ```
 -isi
