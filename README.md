@@ -2,7 +2,7 @@
 Installasi Fujitsu Enterprise Postgres on Oracle Linux 8
 
 
-https://www.postgresql.fastware.com/knowledge-base/quick-start-guides
+```https://www.postgresql.fastware.com/knowledge-base/quick-start-guides
 
 yum install redhat-lsb -y
 
