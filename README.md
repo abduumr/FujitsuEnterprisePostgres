@@ -86,10 +86,16 @@ Syncing disks.
 ```
 [root@ABDUMR ~]# pvcreate /dev/sdb1
   Physical volume "/dev/sdb1" successfully created.
+```
+```
 [root@ABDUMR ~]# vgcreate db_vg /dev/sdb1
   Volume group "db_vg" successfully created
+```
+```
 [root@ABDUMRt ~]# lvcreate -l 100%FREE -n db_lv db_vg
   Logical volume "db_lv" created.
+```
+```
 [root@ABDUMR ~]# mkfs.ext4 /dev/db_vg/db_lv
 mke2fs 1.45.6 (20-Mar-2020)
 Creating filesystem with 15727616 4k blocks and 3932160 inodes
@@ -103,9 +109,15 @@ Writing inode tables: done
 Creating journal (65536 blocks): done
 Writing superblocks and filesystem accounting information: done
 
+```
+```
 [root@ABDUMR ~]# mkdir /mnt/db
 [root@ABDUMR ~]# mount /dev/db_vg/db_lv /mnt/db
+```
+```
 [root@ABDUMR ~]# vim /etc/fstab
+/dev/db_vg/db_lv /mnt/db ext4 defaults 0 0
+
 ```
 yum install redhat-lsb -y
 
