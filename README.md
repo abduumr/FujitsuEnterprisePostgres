@@ -149,7 +149,6 @@ tmpfs                    453M     0  453M   0% /run/user/0
 /dev/mapper/db_vg-db_lv   59G   24K   56G   1% /mnt/db
 
 ```
-
 ```
 [root@ABDUMR ~]# yum install redhat-lsb -y
 [root@ABDUMR ~]# yum install epel-release -y
@@ -365,67 +364,74 @@ ase
 ```
 
 ```
--isi
+postgres=# create database dashboard;
+CREATE DATABASE
+postgres=# \l
+                           List of databases
+   Name    |  Owner  | Encoding | Collate | Ctype |  Access privileges
+-----------+---------+----------+---------+-------+---------------------
+ dashboard | fepuser | UTF8     | C       | C     |
+ postgres  | fepuser | UTF8     | C       | C     |
+ template0 | fepuser | UTF8     | C       | C     | =c/fepuser         +
+           |         |          |         |       | fepuser=CTc/fepuser
+ template1 | fepuser | UTF8     | C       | C     | =c/fepuser         +
+           |         |          |         |       | fepuser=CTc/fepuser
+(4 rows)
+
+```
+
+```
+[root@ABDUMR fsepv14webadmin]# cd /opt/fsepv14webadmin/sbin/
+[root@ABDUMR sbin]# ls
+WebAdminPs  WebAdminSetup  WebAdminStart  WebAdminStop
+[root@ABDUMR sbin]# ./WebAdminSetup
+
+*********************
+*** WebAdminSetup ***
+*********************
+
+enter port number of Web Server (default: 27515):
+->
+
+enter Internal port number for WebAdmin(default: 27516):
+->
+
+Start WebAdmin automatically when system starting ? [y,n] (default: y)
+-> y
+
+### information ###
+
+port number of Web Server : 27515
+Internal port number for WebAdmin    : 27516
+WebAdmin autostart             : yes
+
+Confirm the information ? [y,n] y
+
+
+### stopping WebAdmin ###
+
+### WebAdmin was stopped ###
+
+### making configuration files ###
+
+### editing /etc/services ###
+
+### starting WebAdmin ###
+
+
+### finished ###
 ```
 
 ```
--isi
+[root@ABDUMR sbin]# sudo firewall-cmd --permanent --add-port=27515/tcp
+success
+[root@ABDUMR sbin]# sudo firewall-cmd --reload
+success
 ```
 
 ```
--isi
+http://192.168.100.14:27515/
 ```
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
