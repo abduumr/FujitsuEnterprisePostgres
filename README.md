@@ -54,7 +54,7 @@ tmpfs                453M     0  453M   0% /run/user/0
 Mem:          4.4Gi       587Mi       1.9Gi        10Mi       1.9Gi       3.6Gi
 Swap:         4.8Gi          0B       4.8Gi
 ```
-
+Perintah fdisk /dev/sdb digunakan untuk mengelola partisi pada perangkat penyimpanan di Linux.
 ```
 [root@ABDUMR ~]# fdisk /dev/sdb
 
